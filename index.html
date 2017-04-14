@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            background:black;
+        }
+        .center{
+            width: 900px;
+            height: 300px;
+            margin: 50px auto;
+            text-align: center;
+
+        }
+        .center h1
+        {
+            color: cyan;
+        }
+
+        .text input{
+            float: left;
+        }
+        .field input.text
+        {
+            height: 30px;
+            width: 500px;
+            border: 2px solid #3dc2ff;
+
+        }
+        .field input.btn
+        {
+            width: 70px;
+            height: 30px;
+            background: aqua;
+        }
+         .box{
+            position: absolute;
+            background: red;
+            width: 100px;
+            height: 100px;
+             left: 0;
+             top: 0;
+             display: none;
+        }
+        .center ul li {
+                width: 500px;
+                margin: 5px auto;
+                text-align: left;
+                color: #33ff0d;
+                border: 1px solid #3dc2ff;
+        }
+        .center ul li span{
+            float: right;
+           margin-left:  10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+        <div class="center">
+            <h1>我的TODO</h1>
+            <div class="field">
+                <input type="text" placeholder="请输入笔记" class="text">
+                <input type="button" value="提交" class="btn">
+            </div>
+            <ul class="list">
+
+            </ul>
+
+        </div>
+        <div class="box">
+
+        </div>
+        <script src="JQ/jquery-1.11.1.js">
+
+        </script>
+        <script>
+            $(".btn").click(function () {
+                var text = $(".text").val();
+                if(text != "" ) $(".list").prepend("<li><input type='checkbox'>"+text+"<span>删除</span><span>修改</span></li>")
+                if(text == "") alert("请输入笔记")
+                $( ".center ul li span").on("click",function (ev) {
+                    var X = ev.pageX;
+                    var Y = ev.pageY;
+                    $(".box").css({
+                        left:  X + "px",
+                        top : Y +"px",
+                    })
+                    $(".box").show(500);
+                    $(document).one("click",function () {
+                        $(".box").hide(500);
+                    });
+                    $(".box").on("click",function (ev) {
+                        ev.stopPropagation();
+                    })
+                })
+            })
+        </script>
+</body>
+</html>
